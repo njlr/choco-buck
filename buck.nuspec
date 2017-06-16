@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>buck</id>
+    <version>2016.11.11.01</version>
+    <title>Buck</title>
+    <authors>Facebook</authors>
+    <projectUrl>https://buckbuild.com/</projectUrl>
+    <tags>buck build</tags>
+    <summary>A high-performance build tool</summary>
+    <description>Buck is a build system developed and used by Facebook. It encourages the creation of small, reusable modules consisting of code and resources, and supports a variety of languages on many platforms. </description>
+    <dependencies>
+      <dependency id="ant" />
+      <dependency id="git" />
+      <dependency id="python2" />
+      <dependency id="jdk8" />
+      <dependency id="zip" />
+      <dependency id="unzip" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>
