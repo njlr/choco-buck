@@ -6,16 +6,22 @@
     <title>Buck</title>
     <authors>Facebook</authors>
     <projectUrl>https://buckbuild.com/</projectUrl>
+    <iconUrl>https://buckbuild.com/static/logo.png</iconUrl>
+    <licenseUrl>https://github.com/facebook/buck/blob/master/LICENSE</licenseUrl>
+    <packageSourceUrl>https://github.com/facebook/buck/</packageSourceUrl>
+    <docsUrl>https://buckbuild.com/setup/getting_started.html</docsUrl>
+    <bugTrackerUrl>https://github.com/facebook/buck/issues</bugTrackerUrl>
+    <releaseNotes>https://github.com/facebook/buck/releases</releaseNotes>
     <tags>buck build</tags>
     <summary>A high-performance build tool</summary>
     <description>Buck is a build system developed and used by Facebook. It encourages the creation of small, reusable modules consisting of code and resources, and supports a variety of languages on many platforms. </description>
     <dependencies>
-      <dependency id="ant" />
-      <dependency id="git" />
-      <dependency id="python2" />
-      <dependency id="jdk8" />
-      <dependency id="zip" />
-      <dependency id="unzip" />
+      <dependency id="ant" version="1.10.0" />
+      <dependency id="git" version="2.12.0" />
+      <dependency id="python2" version="2.7.0" />
+      <dependency id="jdk8" version="8.0.0" />
+      <dependency id="zip" version="3.0.0" />
+      <dependency id="unzip" version="6.0.0" />
     </dependencies>
   </metadata>
   <files>
