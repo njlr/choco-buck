@@ -16,7 +16,7 @@
     <summary>A high-performance build tool</summary>
     <description>Buck is a build system developed and used by Facebook. It encourages the creation of small, reusable modules consisting of code and resources, and supports a variety of languages on many platforms. </description>
     <dependencies>
-      <dependency id="ant" version="1.10.0" />
+      <dependency id="ant" version="1.0.0" />
       <dependency id="git" version="2.12.0" />
       <dependency id="python2" version="2.7.0" />
       <dependency id="jdk8" version="8.0.0" />
