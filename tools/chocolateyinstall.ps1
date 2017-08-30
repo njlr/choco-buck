@@ -1,5 +1,5 @@
 # Ensure that ant is available
-refreshenv
+refreshenv;
 
 $ErrorActionPreference = 'Stop';
 
