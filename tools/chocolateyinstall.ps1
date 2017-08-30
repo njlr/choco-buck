@@ -1,9 +1,12 @@
+# Ensure that ant is available
+refreshenv
+
 $ErrorActionPreference = 'Stop';
 
 $packageName = 'buck';
 $toolsDir = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)";
 
-$extractionPath = "C:\" + $packageName
+$extractionPath = $env:SystemDrive + "\" + $packageName
 $url = "https://github.com/facebook/buck/archive/v" + $env:ChocolateyPackageVersion + ".zip"
 
 Install-ChocolateyZipPackage "$packageName" "$url" "$extractionPath"
@@ -18,6 +21,6 @@ ant;
 
 Write-Output "Finished building Buck. "
 
-$executablePath = $buckPath + "\bin\buck";
+$binFilePath = $buckPath + "\bin\buck.bat";
 
-Install-ChocolateyPath $executablePath;
+Install-BinFile "buck" $binFilePath
