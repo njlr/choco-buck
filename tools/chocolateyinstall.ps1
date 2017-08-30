@@ -18,4 +18,6 @@ ant;
 
 Write-Output "Finished building Buck. "
 
-Install-ChocolateyPath $buckPath + "\bin\buck";
+$executablePath = $buckPath + "\bin\buck";
+
+Install-ChocolateyPath $executablePath;
