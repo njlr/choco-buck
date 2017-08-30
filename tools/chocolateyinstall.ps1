@@ -3,23 +3,19 @@ $ErrorActionPreference = 'Stop';
 $packageName = 'buck';
 $toolsDir = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)";
 
-# We need to ensure that ant is available
-refreshenv
+$extractionPath = "C:\" + $packageName
+$url = "https://github.com/facebook/buck/archive/v" + $env:ChocolateyPackageVersion + ".zip"
 
-Write-Output "Cloning Buck... "
-cd C:\;
-If (!(Test-Path -Path "buck")) {
-  git clone "https://github.com/facebook/buck.git";
-}
-cd buck;
-Write-Output "Checking out tag... "
-$branch = ("tags/v" + $env:ChocolateyPackageVersion);
-Write-Output $branch
-git checkout -q $branch;
-Write-Output "Done. "
+Install-ChocolateyZipPackage "$packageName" "$url" "$extractionPath"
+
+$buckPath = $extractionPath + "\" + $packageName + "-" + $env:ChocolateyPackageVersion
+
+cd $buckPath;
 
 Write-Output "Building Buck... "
-ant;
-Write-Output "Done. "
 
-Install-ChocolateyPath "C:\buck\bin\buck";
+ant;
+
+Write-Output "Finished building Buck. "
+
+Install-ChocolateyPath $buckPath + "\bin\buck";
