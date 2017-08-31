@@ -1,1 +1,5 @@
-rd -r -force "C:\buck\"
+Uninstall-BinFile "buck"
+
+$buckPath = $env:SystemDrive + "\buck";
+
+rd -r -force $buckPath

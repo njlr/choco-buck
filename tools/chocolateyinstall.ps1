@@ -1,26 +1,37 @@
 # Ensure that ant is available
 refreshenv;
 
+python --version;
+java -version;
+ant -version;
+
 $ErrorActionPreference = 'Stop';
 
 $packageName = 'buck';
 $toolsDir = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)";
 
-$extractionPath = $env:SystemDrive + "\" + $packageName
-$url = "https://github.com/facebook/buck/archive/v" + $env:ChocolateyPackageVersion + ".zip"
+$clonePath = $env:SystemDrive + "\buck";
 
-Install-ChocolateyZipPackage "$packageName" "$url" "$extractionPath"
+If (!(Test-Path -Path $clonePath)) {
+  Write-Output "Cloning Buck... ";
+  git clone "https://github.com/facebook/buck.git" $clonePath;
+}
 
-$buckPath = $extractionPath + "\" + $packageName + "-" + $env:ChocolateyPackageVersion
+cd $clonePath;
 
-cd $buckPath;
+$branch = ("tags/v" + $env:ChocolateyPackageVersion);
+Write-Output $branch;
+git checkout -q $branch;
 
-Write-Output "Building Buck... "
+Write-Output "Building Buck... ";
+
+$javaargs = "-Djna.nosys=true";
+$javaargs | Out-File -encoding ASCII ".buckjavaargs.local";
 
 ant;
 
-Write-Output "Finished building Buck. "
+$binFilePath = $clonePath + "\bin\buck.bat";
 
-$binFilePath = $buckPath + "\bin\buck.bat";
+Write-Output $binFilePath;
 
 Install-BinFile "buck" $binFilePath
