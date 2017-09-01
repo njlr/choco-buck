@@ -25,10 +25,13 @@ If (!(Test-Path -Path $clonePath)) {
 
 Write-Output "Building Buck... ";
 
+$env:BUCK_EXTRA_JAVA_ARGS = "-Djna.nosys=true";
+
 $javaargs = "-Djna.nosys=true";
 $javaargs | Out-File -encoding ASCII ".buckjavaargs.local";
 
 ant;
+bin\\buck build buck;
 
 $binFilePath = $clonePath + "\bin\buck.bat";
 
