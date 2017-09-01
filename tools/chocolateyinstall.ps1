@@ -1,27 +1,27 @@
 # Ensure that ant is available
 refreshenv;
 
-python --version;
-java -version;
-ant -version;
-
-$ErrorActionPreference = 'Stop';
+$ErrorActionPreference = 'SilentlyContinue';
 
 $packageName = 'buck';
 $toolsDir = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)";
 
 $clonePath = $env:SystemDrive + "\buck";
 
+$tag = "v" + $env:ChocolateyPackageVersion;
+$branch = "tags/" + $tag;
+
+Write-Output $branch;
+
 If (!(Test-Path -Path $clonePath)) {
   Write-Output "Cloning Buck... ";
-  git clone "https://github.com/facebook/buck.git" $clonePath;
+  Write-Output "git clone --branch $tag --single-branch https://github.com/facebook/buck.git $clonePath";
+  git clone --quiet --branch $tag --single-branch https://github.com/facebook/buck.git $clonePath;
+  cd $clonePath;
+} else {
+  cd $clonePath;
+  git checkout -q $branch;
 }
-
-cd $clonePath;
-
-$branch = ("tags/v" + $env:ChocolateyPackageVersion);
-Write-Output $branch;
-git checkout -q $branch;
 
 Write-Output "Building Buck... ";
 
